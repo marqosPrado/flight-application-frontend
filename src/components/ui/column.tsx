@@ -1,60 +1,43 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { FavoriteButton } from "./favorite-button";
 
-export type Flight = {
-  flightNumber: string;
-  airline: string;
-  origin: string;
-  destination: string;
-  departure: string;
-  arrival: string;
-  price: string;
-};
+interface ColumnsParams {
+  favoriteFlights: Set<string>;
+  onFavorited: (flightNumber: string) => void;
+}
 
-export const columns: ColumnDef<Flight>[] = [
-  {
-    accessorKey: "flightNumber",
-    header: "Nº do Voo",
-  },
-  {
-    accessorKey: "airline",
-    header: "Companhia",
-  },
-  {
-    accessorKey: "origin",
-    header: "Origem",
-  },
-  {
-    accessorKey: "destination",
-    header: "Destino",
-  },
-  {
-    accessorKey: "departure",
-    header: "Partida",
-    cell: ({ row }) => {
-      const date = new Date(row.original.departure);
-      return date.toLocaleString();
+export function getColumns({ favoriteFlights, onFavorited }: ColumnsParams): ColumnDef<Flight>[] {
+  return [
+    { accessorKey: "flightNumber", header: "Nº do Voo" },
+    { accessorKey: "airline", header: "Companhia" },
+    { accessorKey: "origin", header: "Origem" },
+    { accessorKey: "destination", header: "Destino" },
+    {
+      accessorKey: "departure",
+      header: "Partida",
+      cell: ({ row }) => new Date(row.original.departure).toLocaleString(),
     },
-  },
-  {
-    accessorKey: "arrival",
-    header: "Chegada",
-    cell: ({ row }) => {
-      const date = new Date(row.original.arrival);
-      return date.toLocaleString();
+    {
+      accessorKey: "arrival",
+      header: "Chegada",
+      cell: ({ row }) => new Date(row.original.arrival).toLocaleString(),
     },
-  },
-  {
-    accessorKey: "price",
-    header: "Preço",
-    cell: ({ row }) => `R$ ${row.original.price}`,
-  },
-  {
-    id: "favorite",
-    header: "Favoritar",
-    cell: ({ row }) => (
-      <FavoriteButton flightNumber={row.original.flightNumber} />
-    ),
-    enableSorting: false,
-  },
-];
+    {
+      accessorKey: "price",
+      header: "Preço",
+      cell: ({ row }) => `R$ ${row.original.price}`,
+    },
+    {
+      id: "favorite",
+      header: "Favoritar",
+      cell: ({ row }) => (
+        <FavoriteButton
+          flightNumber={row.original.flightNumber}
+          isFavorited={favoriteFlights.has(row.original.flightNumber)}
+          onFavorited={onFavorited}
+        />
+      ),
+      enableSorting: false,
+    },
+  ];
+}
