@@ -10,7 +10,6 @@ import { DataTable } from "./data-table";
 import { columns } from "./column";
 import { Plane } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Pagination } from "@/components/ui/pagination";
 import { CustomPagination } from "./custom-pagination";
 
 interface Flight {

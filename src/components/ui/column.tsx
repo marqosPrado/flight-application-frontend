@@ -1,4 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
+import { FavoriteButton } from "./favorite-button";
 
 export type Flight = {
   flightNumber: string;
@@ -47,5 +48,13 @@ export const columns: ColumnDef<Flight>[] = [
     accessorKey: "price",
     header: "Preço",
     cell: ({ row }) => `R$ ${row.original.price}`,
+  },
+  {
+    id: "favorite",
+    header: "Favoritar",
+    cell: ({ row }) => (
+      <FavoriteButton flightNumber={row.original.flightNumber} />
+    ),
+    enableSorting: false,
   },
 ];
