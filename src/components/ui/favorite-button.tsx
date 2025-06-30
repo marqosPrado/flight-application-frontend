@@ -1,21 +1,30 @@
-"use client";
-
 import { Button } from "./button";
-import { useState } from "react";
 import { Star } from "lucide-react";
+import { useState, useEffect } from "react";
 import { addBookmark } from "@/services/bookmarkService";
 
 interface FavoriteButtonProps {
   flightNumber: string;
+  isFavorited: boolean;
+  onFavorited: (flightNumber: string) => void;
 }
 
-export function FavoriteButton({ flightNumber }: FavoriteButtonProps) {
-  const [disabled, setDisabled] = useState(false);
+export function FavoriteButton({
+  flightNumber,
+  isFavorited,
+  onFavorited,
+}: FavoriteButtonProps) {
+  const [disabled, setDisabled] = useState(isFavorited);
+
+  useEffect(() => {
+    setDisabled(isFavorited);
+  }, [isFavorited]);
 
   const handleBookmark = async () => {
     try {
       await addBookmark(flightNumber);
       setDisabled(true);
+      onFavorited(flightNumber);
     } catch (error) {
       console.error("Erro ao adicionar favorito:", error);
     }
