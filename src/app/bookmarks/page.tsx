@@ -5,8 +5,9 @@ import { DataTable } from "@/components/ui/data-table";
 import { getBookmarks, removeBookmark } from "@/services/bookmarkService";
 import { getColumnsBookmark } from "@/components/ui/columns-bookmarks";
 import Header from "@/components/ui/header";
+import { Flight } from "@/types/flight";
 
-export default function FavoritosPage() {
+export default function BookmarkPage() {
     const [flights, setFlights] = useState<Flight[]>([]);
 
     useEffect(() => {

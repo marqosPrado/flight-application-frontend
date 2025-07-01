@@ -1,4 +1,4 @@
-interface Flight {
+export interface Flight {
     flightNumber: string;
     airline: string;
     origin: string;

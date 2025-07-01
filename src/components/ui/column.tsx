@@ -1,5 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { FavoriteButton } from "./favorite-button";
+import { Flight } from "@/types/flight";
 
 interface ColumnsParams {
   favoriteFlights: Set<string>;
