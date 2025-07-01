@@ -7,3 +7,7 @@ export function addBookmark(flightNumber: string) {
 export function getBookmarks() {
   return api.get("/bookmarks").then((res) => res.data);
 }
+
+export function removeBookmark(flightNumber: string) {
+  return api.delete(`/bookmarks/${flightNumber}`);
+}
