@@ -9,9 +9,11 @@ export default function Header() {
           Flight Application
         </Link>
 
-        <Button variant="secondary" className="text-[#003b95] bg-white hover:bg-gray-100">
-          Favoritos
-        </Button>
+        <Link href="/bookmarks">
+          <Button variant="secondary" className="text-[#003b95] bg-white hover:bg-gray-100">
+            Favoritos
+          </Button>
+        </Link>
       </div>
     </header>
   );
