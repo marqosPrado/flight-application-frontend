@@ -1,13 +1,17 @@
 import { Flight } from "@/types/flight";
 import { ColumnDef } from "@tanstack/react-table";
 import RemoveButton from "./remove-button";
+import { FavoriteButton } from "./favorite-button";
+import { RemovedFlight } from "@/types/removed-flights";
 
 interface ColumnsParams {
   onRemove: (flightNumber: string) => void;
+  onFavorited: (flightNumber: string) => void;
 }
 
-export function getColumnsBookmark({ onRemove }: ColumnsParams): ColumnDef<Flight>[] {
-  return [
+export function getColumnsBookmark({ onRemove, onFavorited }: ColumnsParams): ColumnDef<Flight | RemovedFlight>[] {
+  
+return [
     { accessorKey: "flightNumber", header: "Nº do Voo" },
     { accessorKey: "airline", header: "Companhia" },
     { accessorKey: "origin", header: "Origem" },
@@ -30,7 +34,13 @@ export function getColumnsBookmark({ onRemove }: ColumnsParams): ColumnDef<Fligh
     {
       id: "remove",
       header: "Remover",
-      cell: ({ row }) => (
+      cell: ({ row }) => (row.original as RemovedFlight).isRemoved ? (
+        <FavoriteButton
+          flightNumber={row.original.flightNumber}
+          isFavorited={false}
+          onFavorited={() => onFavorited(row.original.flightNumber)}
+        />
+      ) : (
         <RemoveButton
           flightNumber={row.original.flightNumber}
           onRemove={onRemove}
