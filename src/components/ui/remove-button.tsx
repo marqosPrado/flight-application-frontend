@@ -10,7 +10,6 @@ import {
   AlertDialogFooter
 } from "@/components/ui/alert-dialog";
 import { Trash2 } from "lucide-react";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 interface RemoveButtonProps {
@@ -19,15 +18,13 @@ interface RemoveButtonProps {
 }
 
 function RemoveButton({ flightNumber, onRemove }: RemoveButtonProps) {
-  const [open, setOpen] = useState(false);
 
   function handleConfirm() {
     onRemove(flightNumber);
-    setOpen(false);
   }
 
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
+    <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button className="bg-red-500 hover:bg-red-600 text-white px-3 py-1" size="sm">
           <Trash2 className="w-4 h-4 mr-1" />
@@ -42,7 +39,7 @@ function RemoveButton({ flightNumber, onRemove }: RemoveButtonProps) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={() => setOpen(false)}>Cancelar</AlertDialogCancel>
+          <AlertDialogCancel>Cancelar</AlertDialogCancel>
           <AlertDialogAction onClick={handleConfirm}>Remover</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

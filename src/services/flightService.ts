@@ -18,6 +18,10 @@ export async function searchFlights(params: SearchFlightParams) {
     return response.data;
 }
 
+export function findFlightByFlightNumber(flightNumber: string) {
+  return api.get(`/flights/${flightNumber}`).then((res) => res.data);
+}
+
 export async function getFlights(page = 1, pageSize = 10) {
     const response = await api.get("/flights", {
         params: {
