@@ -1,7 +1,16 @@
-import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogCancel,
+  AlertDialogAction,
+  AlertDialogHeader,
+  AlertDialogFooter
+} from "@/components/ui/alert-dialog";
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AlertDialogHeader, AlertDialogFooter } from "./alert-dialog";
 
 interface RemoveButtonProps {
   flightNumber: string;
@@ -17,10 +26,7 @@ function RemoveButton({ flightNumber, onRemove }: RemoveButtonProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
-          className="bg-red-500 hover:bg-red-600 text-white px-3 py-1"
-          size="sm"
-        >
+        <Button className="bg-red-500 hover:bg-red-600 text-white px-3 py-1" size="sm">
           <Trash2 className="w-4 h-4 mr-1" />
           Remover
         </Button>
