@@ -1,6 +1,5 @@
-import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "@radix-ui/react-alert-dialog";
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
 import { Trash2 } from "lucide-react";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AlertDialogHeader, AlertDialogFooter } from "./alert-dialog";
 
@@ -10,23 +9,17 @@ interface RemoveButtonProps {
 }
 
 function RemoveButton({ flightNumber, onRemove }: RemoveButtonProps) {
-  const [open, setOpen] = useState(false);
 
   function handleConfirm() {
     onRemove(flightNumber);
-    setOpen(false);
   }
 
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
+    <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
           className="bg-red-500 hover:bg-red-600 text-white px-3 py-1"
           size="sm"
-          onClick={(e) => {
-            e.preventDefault();
-            setOpen(true);
-          }}
         >
           <Trash2 className="w-4 h-4 mr-1" />
           Remover
@@ -40,7 +33,7 @@ function RemoveButton({ flightNumber, onRemove }: RemoveButtonProps) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={() => setOpen(false)}>Cancelar</AlertDialogCancel>
+          <AlertDialogCancel>Cancelar</AlertDialogCancel>
           <AlertDialogAction onClick={handleConfirm}>Remover</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
